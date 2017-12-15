@@ -1,4 +1,6 @@
-import java.util.Scanner
+package app
+
+import java.util.*
 
 class Player {
 
