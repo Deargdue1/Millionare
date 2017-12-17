@@ -5,47 +5,25 @@ import java.util.Random
 import com.beust.klaxon.Parser
 
 class Questions {
-
-    /**
-     * Декларирование переменных
-     */
-    private val random : Random = Random()
-
+    val random = Random()
     private val questions : JsonObject
-
-    private val answers : Array<String> = arrayOf(
-            "a) Седьмого ноября b) Восьмого марта c) Первого мая d) Четвертого июня",
-            "a) Пешеходный b) Городской общественный c) Авиационный d) Железнодорожный"
-    )
-
-    val correctAnswers = arrayOf("c", "a")
-
-    /**
-     * Запрос случайного индекса для вопросов и ответов
-     */
-     val randomPos = 1
-
-    /**
-     *  Создание функции для выведения вопроса и вариантов ответа на экран
-     */
-    fun getNewQuestion() {
-        val try1 = questions[randomPos.toString()]
-        println(try1)
-        println(answers[randomPos])
+    private val answers : JsonObject
+    val correctAnswers : JsonObject
+    var randomPos : Int
+    init {
+        questions = getParseJSON("/database/questions.json") as JsonObject
+        answers = getParseJSON("/database/answers.json") as JsonObject
+        correctAnswers = getParseJSON("/database/currentAnswers.json") as JsonObject
+        randomPos = random.nextInt(questions.size)
     }
-
-    /**
-     * get parse JSON
-     */
+    fun getNewQuestion() {
+        println(questions[randomPos.toString()])
+        println(answers[randomPos.toString()])
+    }
     private fun getParseJSON(name: String) : Any? {
         val cls = Parser::class.java
         return cls.getResourceAsStream(name)?.let { inputStream ->
             return Parser().parse(inputStream)
         }
     }
-
-    init {
-        questions = getParseJSON("/database/questions.json") as JsonObject
-    }
-
 }
