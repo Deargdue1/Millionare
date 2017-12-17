@@ -9,16 +9,16 @@ class Questions {
     /**
      * Декларирование переменных
      */
-    private val random = Random()
+    private val random : Random = Random()
 
-    private var questions : Any= false
+    private val questions : JsonObject
 
-    private val answers = arrayOf(
+    private val answers : Array<String> = arrayOf(
             "a) Седьмого ноября b) Восьмого марта c) Первого мая d) Четвертого июня",
             "a) Пешеходный b) Городской общественный c) Авиационный d) Железнодорожный"
     )
 
-     val correctAnswers = arrayOf("c", "a")
+    val correctAnswers = arrayOf("c", "a")
 
     /**
      * Запрос случайного индекса для вопросов и ответов
@@ -29,16 +29,23 @@ class Questions {
      *  Создание функции для выведения вопроса и вариантов ответа на экран
      */
     fun getNewQuestion() {
-        questions = parse("/database/questions.json") as com.beust.klaxon.JsonObject
-        val try1 = (questions as JsonObject)[randomPos.toString()]
+        val try1 = questions[randomPos.toString()]
         println(try1)
         println(answers[randomPos])
     }
-    fun parse(name: String) : Any? {
+
+    /**
+     * get parse JSON
+     */
+    private fun getParseJSON(name: String) : Any? {
         val cls = Parser::class.java
         return cls.getResourceAsStream(name)?.let { inputStream ->
             return Parser().parse(inputStream)
         }
+    }
+
+    init {
+        questions = getParseJSON("/database/questions.json") as JsonObject
     }
 
 }
