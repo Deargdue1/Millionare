@@ -1,11 +1,11 @@
 package app
 
 class Gamemode{
-    /*
+    /**
     Переменная для ведения подсчёта количества вопросов
     */
     var questionnumber = 1
-    /*
+    /**
     Запуск основного режима игры
      */
     fun start(){
@@ -13,7 +13,7 @@ class Gamemode{
         val answer = Player()
         if (questionnumber <= 2){
             question.getNewQuestion()
-            if (answer.getCurrentAnswer() == (question.correctAsnswers[question.randomPos])) {
+            if (answer.getCurrentAnswer() == (question.correctAnswers[question.randomPos])) {
                 println("И это... правильный ответ!")
                 if (questionnumber<2){println("Следующий вопрос!")}
                 questionnumber++
