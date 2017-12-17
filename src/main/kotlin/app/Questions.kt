@@ -23,7 +23,12 @@ class Questions {
     /**
      * Запрос случайного индекса для вопросов и ответов
      */
-     val randomPos = 1
+     val randomPos: Int
+
+    init {
+        questions = getParseJSON("/database/questions.json") as JsonObject
+        randomPos = 4
+    }
 
     /**
      *  Создание функции для выведения вопроса и вариантов ответа на экран
@@ -44,8 +49,5 @@ class Questions {
         }
     }
 
-    init {
-        questions = getParseJSON("/database/questions.json") as JsonObject
-    }
 
 }
