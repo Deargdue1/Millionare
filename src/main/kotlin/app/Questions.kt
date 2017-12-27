@@ -23,6 +23,7 @@ class Questions {
         println(answers[randomPos.toString()]!!["1"])
     }
 
+
     private fun getParseJSON(name: String): Any? {
         val cls = Parser::class.java
         return cls.getResourceAsStream(name)?.let { inputStream ->
