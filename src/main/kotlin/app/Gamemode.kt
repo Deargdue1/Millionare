@@ -1,27 +1,30 @@
 package app
 
-class Gamemode{
+class Gamemode {
     /**
     Переменная для ведения подсчёта количества вопросов
-    */
+     */
     var questionnumber = 1
+
     /**
     Запуск основного режима игры
      */
-    fun start(){
+    fun start() {
         val question = Questions()
         val answer = Player()
-        if (questionnumber <= 2){
+        if (questionnumber <= 2) {
             question.getNewQuestion()
-            if (answer.getCurrentAnswer() == (question.correctAnswers[question.randomPos])) {
+            if (answer.getCurrentAnswer() == question.correctAnswers[question.randomPos.toString()]) {
                 println("И это... правильный ответ!")
-                if (questionnumber<2){println("Следующий вопрос!")}
+                if (questionnumber < 2) {
+                    println("Следующий вопрос!")
+                }
                 questionnumber++
                 start()
-            }else{
+            } else {
                 println("Ответ неверный. Вы проиграли!")
             }
-        }else {
+        } else {
             println("Поздравляю! Вы стали милионером!")
         }
     }
